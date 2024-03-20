@@ -52,11 +52,11 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['address-list','address-details','company-details','bank-account-list','bank-account-details','user-list','user-details'])]
+    #[Groups(['address-list','address-details','company-details','bank-account-list','bank-account-details','user-list','user-details','company-representation-list','company-representation-details'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['address-list','address-details','company-details','bank-account-list','bank-account-details', 'user-list','user-details'])]
+    #[Groups(['address-list','address-details','company-details','bank-account-list','bank-account-details', 'user-list','user-details','company-representation-list','company-representation-details'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -64,7 +64,7 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
     private ?string $middlename = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['address-list','address-details','company-details','bank-account-list','bank-account-details', 'user-list','user-details'])]
+    #[Groups(['address-list','address-details','company-details','bank-account-list','bank-account-details', 'user-list','user-details','company-representation-list','company-representation-details'])]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 50, unique: true)]
@@ -72,7 +72,7 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
     private ?string $username = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Groups(['address-list','address-details','company-details','bank-account-list','bank-account-details', 'user-list','user-details'])]
+    #[Groups(['address-list','address-details','company-details','bank-account-list','bank-account-details', 'user-list','user-details','company-representation-list','company-representation-details'])]
     private ?string $emailAddress = null;
 
     #[ORM\Column(length: 255)]

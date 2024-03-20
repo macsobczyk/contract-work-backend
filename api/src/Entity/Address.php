@@ -47,7 +47,7 @@ class Address
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['address-list','address-details','company-details','user-list','user-details'])]
+    #[Groups(['address-list','address-details','company-details','user-list','user-details','company-representation-list','company-representation-details'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -55,23 +55,23 @@ class Address
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['address-list','address-details','company-list','company-details','user-details'])]
+    #[Groups(['address-list','address-details','company-list','company-details','user-details','company-representation-details'])]
     private ?string $address = null;
 
     #[ORM\Column(length: 10, nullable: true)]
-    #[Groups(['address-list','address-details','company-list','company-details','user-details'])]
+    #[Groups(['address-list','address-details','company-list','company-details','user-details','company-representation-details'])]
     private ?string $postCode = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['address-list','address-details','company-list','company-details','user-list','user-details'])]
+    #[Groups(['address-list','address-details','company-list','company-details','user-list','user-details','company-representation-list','company-representation-details'])]
     private ?string $city = null;
 
     #[ORM\Column(length: 2)]
-    #[Groups(['address-list','address-details','company-list','company-details','user-list','user-details'])]
+    #[Groups(['address-list','address-details','company-list','company-details','user-list','user-details','company-representation-list','company-representation-details'])]
     private ?string $countryCode = null;
 
     #[ORM\Column(length: 50, nullable: true)]
-    #[Groups(['address-list','address-details','company-list','company-details','user-list','user-details'])]
+    #[Groups(['address-list','address-details','company-list','company-details','user-list','user-details','company-representation-details'])]
     private ?string $phoneNumber = null;
 
     #[ORM\OneToOne(mappedBy: 'address', cascade: ['persist', 'remove'])]
@@ -193,7 +193,7 @@ class Address
         return $this;
     }
 
-    #[Groups(['address-list','address-details','company-list','user-list','user-details'])]
+    #[Groups(['address-list','address-details','company-list','user-list','user-details','company-representation-list','company-representation-details'])]
     public function getCountry(): ?string
     {
         try {
@@ -203,7 +203,7 @@ class Address
         }
     }
 
-    #[Groups(['address-list','address-details','company-list','user-list','user-details'])]
+    #[Groups(['address-list','address-details','company-list','user-list','user-details','company-representation-list','company-representation-details'])]
     public function getAlpha3(): ?string
     {
         try {

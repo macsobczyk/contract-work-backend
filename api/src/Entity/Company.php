@@ -42,20 +42,20 @@ class Company
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['address-list','address-details','company-list','company-details','user-details'])]
+    #[Groups(['address-list','address-details','company-list','company-details','user-details','company-representation-list','company-representation-details'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['address-list','address-details','company-list','company-details','user-details'])]
+    #[Groups(['address-list','address-details','company-list','company-details','user-details','company-representation-list','company-representation-details'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['address-list','address-details','company-list','company-details','user-details'])]
+    #[Groups(['address-list','address-details','company-list','company-details','user-details','company-representation-list','company-representation-details'])]
     private ?string $shortname = null;
 
     #[ORM\OneToOne(inversedBy: 'addressCompany', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['company-list','company-details','user-details'])]
+    #[Groups(['company-list','company-details','user-details','company-representation-list','company-representation-details'])]
     private ?Address $address = null;
 
     #[ORM\Column(length: 50)]

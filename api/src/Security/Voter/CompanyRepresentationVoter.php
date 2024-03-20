@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Security\Voter;
 
-use App\Entity\Company;
+use App\Entity\CompanyRepresentation;
 use App\Entity\Role;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class CompanyVoter extends Voter
+class CompanyRepresentationVoter extends Voter
 {
-    const COMPANY_GET = 'COMPANY_GET';
+    const COMPANY_REPRESENTATION_GET = 'COMPANY_REPRESENTATION_GET';
 
     public function __construct(
         private readonly Security $security
@@ -21,24 +21,24 @@ class CompanyVoter extends Voter
 
     /**
      * @param string $attribute
-     * @param Company $subject
+     * @param CompanyRepresentation $subject
      */
     protected function supports($attribute, $subject): bool
     {
         $supportsAttribute = in_array(
             $attribute, [
-                self::COMPANY_GET
+                self::COMPANY_REPRESENTATION_GET
             ],
             true
         );
 
-        $supportsSubject = $subject instanceof Company;
+        $supportsSubject = $subject instanceof CompanyRepresentation;
         return $supportsAttribute && $supportsSubject;
     }
 
     /**
      * @param string $attribute
-     * @param Company $subject
+     * @param CompanyRepresentation $subject
      * @param TokenInterface $token
      * @return bool
      */
@@ -46,26 +46,19 @@ class CompanyVoter extends Voter
     {
         return match($attribute)
         {
-            self::COMPANY_GET => $this->security->isGranted(Role::ROLE_ADMIN) or $this->canRead($subject),
+            self::COMPANY_REPRESENTATION_GET => $this->security->isGranted(Role::ROLE_ADMIN) or $this->canRead($subject),
             default => false
         };
     }
 
     /**
      * Checks if user is permitted to perform read entity operation
-     * @param Company $subject
+     * @param CompanyRepresentation $subject
      * @return bool
      */
-    private function canRead(Company $subject): bool
+    private function canRead(CompanyRepresentation $subject): bool
     {
-        if ($this->security->isGranted(Role::ROLE_REPRESENTATIVE)) {
-            foreach ($subject->getRepresentatives() as $representative) {
-                if ($representative->getCompanyUser() === $this->security->getUser()) {
-                    return true;
-                }
-            }
-        }
-
+        return $this->security->isGranted(Role::ROLE_REPRESENTATIVE) and $subject->getCompanyUser() === $this->security->getUser();
         return false;
     }
 }

@@ -2,13 +2,31 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\CompanyRepresentationRepository;
+use App\Security\Voter\CompanyRepresentationVoter;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CompanyRepresentationRepository::class)]
 #[ApiResource(
+    operations: [
+        new Get(
+            uriTemplate: '/representation/{id}',
+            requirements: ['id' => '\d+'],
+            security: "is_granted('".Role::ROLE_ADMIN."') or is_granted('".CompanyRepresentationVoter::COMPANY_REPRESENTATION_GET."',object)",
+            normalizationContext: ['groups' => ['company-representation-details']]
+        ),
+        new GetCollection(
+            uriTemplate: '/representation',
+            security: "is_granted('".Role::ROLE_ADMIN."') or is_granted('".Role::ROLE_REPRESENTATIVE."')",
+            normalizationContext: ['groups' => ['company-representation-list']]
+        )
+    ],
     normalizationContext: ['groups' => ['company-representation-list','company-representation-details']],
     denormalizationContext: ['groups' => ['company-representation-write']],
 )]
