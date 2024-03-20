@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use App\Filter as CustomFilter;
 use App\Repository\CompanyRepresentationRepository;
 use App\Security\Voter\CompanyRepresentationVoter;
 use Doctrine\ORM\Mapping as ORM;
@@ -30,8 +31,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
     normalizationContext: ['groups' => ['company-representation-list','company-representation-details']],
     denormalizationContext: ['groups' => ['company-representation-write']],
 )]
+#[ApiFilter(CustomFilter\CompanyRepresentationKeywordSearchFilter::class, properties: [CompanyRepresentation::COMPANY_REPRESENTATION_KEYWORD_SEARCH])]
+#[ApiFilter(OrderFilter::class, properties: ['id' => 'ASC', 'company.name' => 'ASC', 'position' => 'ASC'])]
 class CompanyRepresentation
 {
+    public const COMPANY_REPRESENTATION_KEYWORD_SEARCH = 'company_representation_keyword_search';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
