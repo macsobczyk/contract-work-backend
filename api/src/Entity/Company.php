@@ -81,6 +81,10 @@ class Company
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: Contract::class)]
     private Collection $contracts;
 
+    #[ORM\Column(length: 255)]
+    #[Groups(['company-details'])]
+    private ?string $dpoEmailAddress = null;
+
     public function __construct()
     {
         $this->representatives = new ArrayCollection();
@@ -232,6 +236,18 @@ class Company
                 $contract->setCompany(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDpoEmailAddress(): ?string
+    {
+        return $this->dpoEmailAddress;
+    }
+
+    public function setDpoEmailAddress(string $dpoEmailAddress): static
+    {
+        $this->dpoEmailAddress = $dpoEmailAddress;
 
         return $this;
     }

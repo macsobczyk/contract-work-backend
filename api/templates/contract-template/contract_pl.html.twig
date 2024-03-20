@@ -1,0 +1,208 @@
+{% extends 'contract-template/base.html.twig' %}
+{% block contract %}
+<p align="center">
+    UMOWA Z AUTOREM DZIEŁA nr <strong> {{ contract.contractNumber|default("0") }}</strong>
+</p>
+<p align="center">
+    zawarta w dniu <strong>
+    {% if contract.issuedAt is defined %}
+        {{ contract.issuedAt|date('d.m.Y') }}
+    {% else %}
+        Data zawarcia
+    {% endif %}
+    </strong>
+    w <strong>{{ contract.conclusionPlace|default("Miejsce zawarcia") }}</strong> pomiędzy:
+</p>
+<p>
+    <strong>{{ contract.contractor.firstname|default("Imię") }} {{ contract.contractor.lastname|default("Nazwisko") }}</strong>,
+    zamieszkałym(ą) w
+    <strong>{{ contract.contractor.address.address|default("Adres") }}, {{ contract.contractor.address.postCode|default("kod pocztowy") }} {{ contract.contractor.address.city|default("miasto") }},
+    {{ contract.contractor.address.country|default("państwo") }}</strong>,
+    posiadającym(ą) nr PESEL:
+    <strong>{{ contract.contractor.pesel|default("PESEL") }}</strong>
+     zwanym(ą) dalej <strong>„Autorem” </strong>
+</p>
+<p>A</p>
+<p>
+    <strong>{{ contract.company.name|default("Nazwa firmy") }}</strong>,
+    <strong>
+        {{ contract.company.address.address|default("Adres") }}, {{ contract.company.address.postCode|default("kod pocztowy") }} {{ contract.company.address.city|default("miasto") }},
+        {{ contract.company.address.country|default("państwo") }}
+    </strong>,
+    NIP:
+    <strong>
+        {{ contract.company.vatin|default("NIP") }}
+    </strong>,
+    KRS:
+    <strong>
+        {{ contract.company.registryNumber|default("Nr KRS") }}
+    </strong>
+    reprezentowaną przez:
+    <strong>
+        {{ contract.representation.position|default("Stanowisko") }} {{ contract.representation.firstname|default("Imię") }} {{ contract.representation.lastname|default("Nazwisko") }}
+    </strong>,
+    zwanym dalej <strong>„Zamawiającym”</strong>
+</p>
+<p>ZAMAWIAJĄCY oraz AUTOR będą zwani w dalszej części niniejszej Umowy <strong>„STRONAMI”</strong></p>
+<p align="center"><strong>§ 1 - Przedmiot Umowy</strong></p>
+<ol>
+    <li><p>Przedmiotem Umowy jest <strong>{{ contract.subject|default("Przedmiot umowy") }}</strong>.</p></li>
+    <li><p>Autor dostarczy Dzieła do siedziby Zamawiającego do dnia
+        <strong>
+        {% if contract.terminatedAt is defined %}
+        {{ contract.terminatedAt|date('d.m.Y') }}
+        {% else %}
+        Data zakończenia
+        {% endif %}
+        </strong>.
+    </p></li>
+    <li><p>Autor zobowiązuje się osobiście wykonać Dzieło z najwyższą starannością.</p></li>
+    <li><p>Umowa zostaje zawarta do dnia
+        <strong>
+        {% if contract.terminatedAt is defined %}
+        {{ contract.terminatedAt|date('d.m.Y') }}
+        {% else %}
+        Data zakończenia
+        {% endif %}
+        </strong>.
+    </p></li>
+</ol>
+<p align="center"><strong>§ 2 - Oświadczenie Autora</strong></p>
+<ol>
+    <li><p>Autor oświadcza, że Dzieło będzie wynikiem jego wyłącznej twórczości oraz że jego wyłączne prawo autorskie do Dzieła nie jest w żaden sposób ograniczone. </p></li>
+</ol>
+<p align="center"><strong>§ 3 - Przyjęcie Dzieła</strong></p>
+<ol>
+    <li><p>
+        Zamawiający zastrzega sobie, iż przyjęcie Dzieła może być uzależnione od dokonania przez Autora określonych zmian lub poprawek albo usunięcia ewentualnych usterek,
+        wyznaczając Autorowi odpowiedni termin do ich wykonania.
+    </p></li>
+    <li><p>
+        Jeżeli w ciągu 5 (pięciu) dni od dostarczenia Dzieła przez Autora, Zamawiający nie zawiadomi Autora o przyjęciu, odrzuceniu lub konieczności dokonania zmian w
+        ukończonym Dziele, Dzieło należy uważać za przyjęte przez Zamawiającego.
+    </p></li>
+</ol>
+<p align="center"><strong>§ 4 - Prawa autorskie</strong></p>
+<ol>
+    <li><p>Zamawiający ma prawo dowolnego wykorzystywania Dzieła w zakresie, o którym mowa w § 1 ust. 1 Umowy, w szczególności poprzez wykorzystanie Dzieła w innych utworach, w tym utworach audiowizualnych, w dowolnym kontekście tematycznym.</p></li>
+    <li><p>Z chwilą przyjęcia Dzieła Autor udziela Zamawiającemu zgody na nieodpłatne i wyłączne korzystanie z majątkowych praw autorskich do Dzieła na wszelkich istniejących w chwili zawarcia niniejszej Umowy polach eksploatacji, a w szczególności na polach eksploatacji wymienionych w art. 50 Ustawy o prawie autorskim i prawach pokrewnych, tj.:</p></li>
+</ol>
+<ol type="a">
+    <li><p>utrwalenie,</p></li>
+    <li><p>zwielokrotnienie dowolną techniką,</p></li>
+    <li><p>wprowadzenie do obrotu, w tym poprzez sieć INTERNET,</p></li>
+    <li><p>wprowadzenie do pamięci komputera,</p></li>
+    <li><p>publiczne wykonanie,</p></li>
+    <li><p>publiczne odtworzenie,</p></li>
+    <li><p>najem,</p></li>
+    <li><p>dzierżawa,</p></li>
+    <li><p>wystawienie,</p></li>
+    <li><p>wyświetlenie,</p></li>
+    <li><p>nadanie za pomocą wizji lub fonii przewodowej lub bezprzewodowej przez stację naziemną,</p></li>
+    <li><p>nadanie za pośrednictwem satelity,</p></li>
+    <li><p>równoczesne i integralne nadanie utworu nadawanego przez inną organizację radiową lub telewizyjną.</p></li>
+</ol>
+<ol start="3">
+    <li><p>Zakres nabytych praw będzie umożliwiał eksploatację Dzieła bezterminowo od daty przyjęcia Dzieła przez Zamawiającego na terytorium Rzeczypospolitej Polskiej z zastrzeżeniem, że jeżeli zasięg stacji nadawczej nadającej program z terytorium Rzeczypospolitej Polskiej przekracza to terytorium, to takie przekroczenie nie jest uważane za naruszenie niniejszej Umowy.</p></li>
+    <li><p>Zamawiający ma prawo do dokonania oraz wykorzystywania opracowań Dzieła w postaci przeróbek, fragmentaryzacji, przemontowywania, oraz podejmowania wszelkich innych czynności w ramach wszelkich działań podejmowanych przez Zamawiającego nawet wówczas gdyby efektem tych działań miałaby być utrata indywidualnego charakteru nadanego Dziełu przez Autora. Odwołanie powyższego zezwolenia
+            będzie uzależnione od złożenia przez Autora stosownej kaucji na pokrycie kosztów wywołanych skutkami odwołania.</p></li>
+    <li><p>Autor upoważnia Zamawiającego do decydowania o terminie pierwszego udostępnienia Dzieła publiczności oraz zezwala na pominięcie nazwiska i imienia Autora w ramach eksploatacji Dzieła.</p></li>
+</ol>
+<p align="center"><strong>§ 5 - Wynagrodzenie</strong></p>
+<p>
+    1. Z tytułu wykonania niniejszej Umowy Zamawiający zobowiązuje się do zapłacenia na rzecz Autora wynagrodzenia w terminie 7 dni od przedstawienia przez Autora rachunku na wskazane na rachunku konto bankowe lub gotówką. Całkowite wynagrodzenie Autora obejmuje wszystkie pola eksploatacji wymienione w § 4 Umowy i wynosi
+    <strong>
+    {% if contract.valueGross is defined %}
+    {{ (contract.valueGross / 100)|number_format(2,',',' ') }}
+    {% else %}
+    Kwota wynagrodzenia
+    {% endif %}
+    </strong> zł (<strong>{{ inWords|default("Kwota wynagrodzenia słownie") }}</strong>).
+</p>
+<p align="center"><strong>§ 6 - Postanowienia końcowe</strong></p>
+<p>1. W sprawach nieuregulowanych w niniejszej Umowie mają zastosowanie przepisy Kodeksu cywilnego oraz ustawy o prawie autorskim i prawach pokrewnych.</p>
+<p>2. Zamawiający ma prawo przeniesienia praw i obowiązków wynikających z niniejszej Umowy na osoby trzecie.</p>
+<p>3. Wszelkie spory wynikłe na tle niniejszej Umowy będą rozstrzygane przez sąd właściwy dla siedziby Zamawiającego. </p>
+<p>4. Wszelkie zmiany niniejszej Umowy wymagają formy pisemnej pod rygorem nieważności.</p>
+<p>5. Umowę sporządzono w dwóch jednobrzmiących egzemplarzach, po jednym dla każdej ze Stron Umowy.</p>
+<table width="100%" cellpadding="0"cellspacing="0" align="center" border="0">
+	<tr>
+		<td style="height:2.5cm!important;">&nbsp;</td>
+		<td style="height:2.5cm!important;">&nbsp;</td>
+	</tr>
+	<tr>
+		<td style="text-align:center!important;">Podpis Zamawiającego</td>
+		<td style="text-align:center!important;">Podpis Wykonawcy</td>
+	</tr>
+</table>
+<p style="page-break-before:always!important;"><strong>Klauzula informacyjna RODO dla Wykonawców Dzieła</strong></p>
+<p><strong>Oświadczam, iż zostałem/am poinformowany/a o tym, że:</strong></p>
+<ol>
+    <li><p><a name="__DdeLink__1298_3324552145"></a>
+            Administratorem moich danych osobowych przetwarzanych w ramach niniejszej umowy o dzieło jest
+            <strong>{{ contract.company.name|default("Nazwa firmy") }}</strong>,
+            <strong>
+                {{ contract.company.address.address|default("Adres") }}, {{ contract.company.address.postCode|default("Kod pocztowy") }} {{ contract.company.address.city|default("Miasto") }},
+                {{ contract.company.address.country|default("Państwo") }}
+            </strong>,
+            NIP:
+            <strong>
+                {{ contract.company.vatin|default("NIP") }}
+            </strong>,
+            KRS:
+            <strong>
+                {{ contract.company.registryNumber|default("Nr KRS") }}
+            </strong>
+        </p></li>
+    <li><p><strong>{{ contract.company.name|default("Nazwa firmy") }}</strong> powołała inspektora ochrony danych, z którym można się skontaktować za pośrednictwem adresu e-mail:
+        <strong><strong>{{ contract.company.dpoEmailAddress|default("Adres email IOD") }}</strong></a></strong>.
+    </p></li>
+    <li><p>Moje dane osobowe będą przetwarzane w celu:</p>
+        <ol>
+            <li>
+                <p>niezbędnym do zawarcia oraz realizacji łączącej mnie i
+                    {{ contract.company.name|default("Nazwa firmy") }} umowy o dzieło, na podstawie przepisu art.
+                    6 ust. 1 pkt b) rozporządzenia Parlamentu Europejskiego i
+                    Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie
+                    ochrony osób fizycznych w związku z przetwarzaniem danych
+                    osobowych i w sprawie swobodnego przepływu takich danych
+                    oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o
+                    ochronie danych), dalej jako RODO,
+                </p>
+            </li>
+            <li><p>wypełnienia obowiązków podatkowo-rozliczeniowych lub księgowo- sprawozdawczych, w oparciu o przepis art. 6 ust. 1 pkt c) RODO; </p></li>
+            <li><p>niezbędnym do ustalenia, dochodzenia lub obrony roszczeń, w tym odszkodowań, związanych z ww. umową, a także udzielania odpowiedzi na Pani/Pana wnioski, pytania lub skargi, oraz
+                    udzielania odpowiedzi w toczących się postepowaniach (prawnie uzasadniony interes administratora), na podstawie przepisu art. 6 ust. 1 pkt f) RODO. </p></li>
+        </ol>
+    </li>
+    <li><p>Pana/Pani dane osobowe nie będą przekazywane do krajów poza Europejski Obszar Gospodarczy.</p></li>
+    <li><p>W związku z przetwarzaniem danych w celu wskazanym powyżej Pana/Pani dane osobowe mogą być udostępniane innym odbiorcom lub kategoriom odbiorców danych osobowych.</p></li>
+    <li><p>Odbiorcami Pana/Pani danych mogą być:</p>
+        <ol>
+            <li>
+                <p>inne podmioty upoważnione do odbioru Pana/Pani danych osobowych na podstawie odpowiednich przepisów prawa, w tym Urząd Skarbowy, ZUS, Bank,</p>
+            </li>
+            <li>
+                <p>podmioty świadczące usługi na rzecz {{ contract.company.name|default("Nazwa firmy") }}, w tym podmioty dostarczające przesyłki kurierskie i pocztę, podmioty dostarczające oprogramowania komputerowe lub świadczące usługi serwisowe dla oprogramowania komputerowego,</p>
+            </li>
+            <li>
+                <p>organy lub podmioty publiczne uprawnione do uzyskania danych na podstawie obowiązujących przepisów prawa (np. sądy, organy ścigania, instytucje państwowe etc.), gdy wystąpią z żądaniem, w oparciu o stosowną podstawę prawną.</p>
+            </li>
+            <li>
+                <p>inne podmioty, które przetwarzają Pana/Pani dane osobowe w imieniu Administratora na podstawie zawartej umowy powierzenia przetwarzania danych osobowych (tzw. podmioty przetwarzające).</p>
+            </li>
+        </ol>
+    </li>
+    <li><p>Pana/Pani dane osobowe będą przetwarzane przez cały okres obowiązywania umowy, a także później - do czasu upływu okresu wymagalności roszczeń związanych z umową, wynikających z Kodeksu
+            cywilnego oraz przez okres wskazany przez przepisy prawa w związku z realizacją obowiązków podatkowych, rachunkowych, ubezpieczeniowych i archiwizacyjnych. Po upływie tego okresu dane
+            osobowe zostaną usunięte.</p></li>
+    <li><p>Posiada Pan/Pani prawo dostępu do treści swoich danych, prawo do ich sprostowania, usunięcia, ograniczenia przetwarzania, prawo do przenoszenia danych oraz prawo wniesienia sprzeciwu wobec przetwarzania.</p></li>
+    <li><p>Ma Pan/Pani prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych, gdy uzna Pan/Pani, iż przetwarzanie danych osobowych Pana/Pani dotyczących narusza przepisy RODO.</p></li>
+    <li><p>Podanie przez Pana/Panią danych osobowych jest dobrowolne, ale konieczne dla potrzeb zawarcia oraz realizacji umowy. W przypadku odmowy podania danych, nie będzie możliwa realizacja poszczególnych celów wskazanych wyżej.</p></li>
+    <li><p>Przetwarzanie danych osobowych nie będzie podlegało zautomatyzowanemu podejmowaniu decyzji, w tym profilowaniu, o którym mowa w art. 22 ust. 1 i 4 RODO.</p></li>
+</ol>
+<p>Data i podpis Wykonawcy</p>
+<style>
+	p {font:Arial, 10pt!important!;line-height:14px;}
+</style>
+{% endblock %}

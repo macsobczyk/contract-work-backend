@@ -3,24 +3,41 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\ContractTemplateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Intl\Languages;
+use \RuntimeException;
 
 #[ORM\Entity(repositoryClass: ContractTemplateRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new GetCollection(
+            uriTemplate: '/contract/template',
+            security: "is_granted('".Role::ROLE_ADMIN."')",
+            normalizationContext: ['groups' => ['contract-template-list']]
+        )
+    ],
+    normalizationContext: ['groups' => ['contract-template-list','contract-template-list-details']],
+    denormalizationContext: ['groups' => ['contract-template-write']],
+)]
 class ContractTemplate
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['contract-template-list'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['contract-template-list'])]
     private ?string $name = null;
 
-    #[ORM\Column(length: 2)]
+    #[ORM\Column(length: 5)]
+    #[Groups(['contract-template-list'])]
     private ?string $languageCode = null;
 
     #[ORM\Column(length: 255)]
@@ -118,5 +135,15 @@ class ContractTemplate
         }
 
         return $this;
+    }
+
+    #[Groups(['contract-template-list'])]
+    public function getLanguage(): ?string
+    {
+        try {
+            return Languages::getName($this->languageCode);
+        } catch(RuntimeException $e) {
+            return null;
+        }
     }
 }

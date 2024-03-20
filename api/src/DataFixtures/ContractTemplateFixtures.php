@@ -17,7 +17,7 @@ class ContractTemplateFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $contractTemplatePL = $this->createContractTemplate(
-            'PL',
+            'pl_PL',
             'Contract for a work with transfer of copyright',
             'contract_pl.html.twig',
             'bill_pl.html.twig'
@@ -27,7 +27,7 @@ class ContractTemplateFixtures extends Fixture
         $this->addReference(self::CONTRACT_TEMPLATE_PL, $contractTemplatePL);
 
         $contractTemplateEN = $this->createContractTemplate(
-            'EN',
+            'en_US',
             'Contract for a work with transfer of copyright',
             'contract_en.html.twig',
             'bill_en.html.twig'

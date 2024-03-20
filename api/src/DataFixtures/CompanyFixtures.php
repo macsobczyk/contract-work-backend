@@ -26,6 +26,7 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
         $company->setCourtRegistry('Dummy Court Registry');
         $company->setRegistryNumber('1234567890');
         $company->setInitialCapital('1,000,000 PLN paid in full in cash');
+        $company->setDpoEmailAddress('dpo@sentica.pl');
 
         $manager->persist($company);
 

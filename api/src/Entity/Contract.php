@@ -44,10 +44,10 @@ class Contract
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $issuedAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $terminatedAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $paidAt = null;
 
     #[ORM\Column]
@@ -88,6 +88,9 @@ class Contract
 
     #[ORM\OneToMany(mappedBy: 'contract', targetEntity: ContractMeta::class, orphanRemoval: true)]
     private Collection $contractMeta;
+
+    #[ORM\Column(length: 255)]
+    private ?string $conclusionPlace = null;
 
     public function __construct()
     {
@@ -415,6 +418,18 @@ class Contract
                 $contractMetum->setContract(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getConclusionPlace(): ?string
+    {
+        return $this->conclusionPlace;
+    }
+
+    public function setConclusionPlace(string $conclusionPlace): static
+    {
+        $this->conclusionPlace = $conclusionPlace;
 
         return $this;
     }
