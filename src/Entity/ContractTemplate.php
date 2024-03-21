@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use App\Controller\ContractTemplate\ViewContractTemplateAction;
+use App\Controller\ContractTemplate\ViewBillTemplateAction;
 use App\Repository\ContractTemplateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -23,6 +24,13 @@ use \RuntimeException;
             requirements: ['id' => '\d+'],
             security: "is_granted('".Role::ROLE_ADMIN."')",
             controller: ViewContractTemplateAction::class,
+        ),
+        new Get(
+            uriTemplate: '/contract/template/{id}/bill',
+            name: 'contract-template-bill',
+            requirements: ['id' => '\d+'],
+            security: "is_granted('".Role::ROLE_ADMIN."')",
+            controller: ViewBillTemplateAction::class,
         ),
         new GetCollection(
             uriTemplate: '/contract/template',

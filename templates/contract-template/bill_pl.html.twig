@@ -1,0 +1,314 @@
+{% extends 'contract-template/base.html.twig' %}
+{% block stylesheets %}
+{% include 'components/pdf-styles.html.twig' %}
+{% include 'components/pdf-bill-styles.html.twig' %}
+{% endblock %}
+{% block contract %}
+<table cellspacing="0" border="0" width="100%">
+    <colgroup span="3" width="67"></colgroup>
+    <colgroup width="24"></colgroup>
+    <colgroup span="2" width="132"></colgroup>
+    <tr>
+        <td height="13" align="left" colspan="3"><strong>Wystawca</strong></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="19" align="left" colspan="3"><strong>{{ contract.contractor.firstname|default("Imię") }} {{ contract.contractor.lastname|default("Nazwisko") }}</strong></td>
+        <td align="right" colspan="3"><strong><font size=4>Rachunek do umowy o dzieło</font></strong></td>
+    </tr>
+    <tr>
+        <td height="13" align="left" colspan="3">
+            {{ contract.contractor.address.address|default("Adres") }}, {{ contract.contractor.address.postCode|default("kod pocztowy") }} {{ contract.contractor.address.city|default("miasto") }},
+            {{ contract.contractor.address.country|default("państwo") }}
+        </td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left" colspan="3">PESEL: {{ contract.contractor.pesel|default("PESEL") }}</td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left" colspan="3"><strong>Odbiorca</strong></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left" colspan="3">
+            <strong>{{ contract.company.name|default("Nazwa firmy") }}</strong>
+        </td>
+        <td align="left"><br></td>
+        <td class="borderded-cell gray-bg" align="center">
+            <strong>Nr rachunku</strong>
+        </td>
+        <td class="borderded-cell gray-bg" align="center">
+            <strong>Data</strong>
+        </td>
+    </tr>
+    <tr>
+        <td height="13" align="left" colspan="3">
+             {{ contract.company.address.address|default("Adres") }}, {{ contract.company.address.postCode|default("kod pocztowy") }} {{ contract.company.address.city|default("miasto") }},
+            {{ contract.company.address.country|default("państwo") }}
+        </td>
+        <td align="left"><br></td>
+        <td class="borderded-cell" align="center">
+            {{ contract.contractNumber|default("Nr rachunku") }}
+        </td>
+        <td class="borderded-cell" align="center" sdval="43924" sdnum="1033;0;D/MM/YYYY">
+            <strong>
+            {% if contract.paidAt is defined %}
+            {{ contract.paidAt|date('d.m.Y') }}
+            {% else %}
+            Data wystawienia
+            {% endif %}
+            </strong>.
+        </td>
+    </tr>
+    <tr>
+        <td height="13" align="left" colspan="3">NIP: {{ contract.company.vatin|default("NIP") }}</td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td class="borderded-cell gray-bg vertical-align-middle" colspan=5 height="15" align="center">
+            <strong>Opis</strong>
+        </td>
+        <td class="borderded-cell gray-bg" align="center">
+            <strong>Kwota brutto</strong>
+        </td>
+    </tr>
+    <tr>
+        <td class="borderded-cell vertical-align-middle" colspan=5 height="48" align="left">
+            {{ contract.subject|default("Przedmiot umowy") }}
+        </td>
+        <td class="borderded-cell" align="right">
+            {% if contract.valueGross is defined %}
+            {{ (contract.valueGross / 100)|number_format(2,',',' ') }}
+            {% else %}
+            Kwota brutto
+            {% endif %}
+            zł
+        </td>
+    </tr>
+    <tr>
+        <td class="borderded-cell vertical-align-middle" colspan=5 height="15" align="right">
+            <strong>ŁĄCZNIE:</strong>
+        </td>
+        <td class="borderded-cell" align="right">
+            {% if contract.valueGross is defined %}
+            {{ (contract.valueGross / 100)|number_format(2,',',' ') }}
+            {% else %}
+            Razem brutto
+            {% endif %}
+            zł
+        </td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td class="borderded-cell gray-bg vertical-align-middle" colspan=5 height="15" align="center">
+            <strong>Rozliczenie</strong>
+        </td>
+        <td class="borderded-cell gray-bg" align="center">
+            <strong>Kwota</strong>
+        </td>
+    </tr>
+    <tr>
+        <td class="borderded-cell vertical-align-middle" colspan=5 height="13" align="right">
+            Wartość brutto:
+        </td>
+        <td class="borderded-cell" align="right">
+            {% if contract.valueGross is defined %}
+            {{ (contract.valueGross / 100)|number_format(2,',',' ') }}
+            {% else %}
+            Razem brutto
+            {% endif %}
+            zł
+        </td>
+    </tr>
+    <tr>
+        <td class="borderded-cell vertical-align-middle" colspan=5 height="13" align="right">
+            Koszty uzyskania przychodu (50%)
+        </td>
+        <td class="borderded-cell" align="right">
+            {% if contract.valueGross is defined %}
+            {{ (contract.valueGross / 200)|number_format(2,',',' ') }}
+            {% else %}
+            Koszty uzyskania
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td class="borderded-cell vertical-align-middle" colspan=5 height="13" align="right">
+            Zaliczka na podatek:
+        </td>
+        <td class="borderded-cell" align="right">
+            {% if contract.valueTax is defined %}
+            {{ (contract.valueTax / 100)|number_format(2,',',' ') }}
+            {% else %}
+            Kwota podatku
+            {% endif %}
+            zł
+        </td>
+    </tr>
+    <tr>
+        <td class="borderded-cell vertical-align-middle" colspan=5 height="13" align="right">
+            Do wypłaty:
+        </td>
+        <td class="borderded-cell" align="right">
+            {% if contract.valueNet is defined %}
+            {{ (contract.valueNet / 100)|number_format(2,',',' ') }}
+            {% else %}
+            Do wypłaty
+            {% endif %}
+            zł
+        </td>
+    </tr>
+    <tr>
+        <td height="15" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left">…………………………………</td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="center">podpis wystawcy</td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="13" align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+        <td align="left"><br></td>
+    </tr>
+    <tr>
+        <td height="15" align="left" colspan="6">
+            Rachunek bankowy: {{ contract.contractrorBankAccout.bankName|default("Bank") }} {{ contract.contractrorBankAccout.accountNumber|default("Numer rachunku") }}
+        </td>
+    </tr>
+</table>
+{% endblock %}
