@@ -19,6 +19,13 @@ use \RuntimeException;
 #[ApiResource(
     operations: [
         new Get(
+            uriTemplate: '/contract/template/{id}',
+            name: 'contract-template-view',
+            requirements: ['id' => '\d+'],
+            security: "is_granted('".Role::ROLE_ADMIN."')",
+            normalizationContext: ['groups' => ['contract-template-details']]
+        ),
+        new Get(
             uriTemplate: '/contract/template/{id}/contract',
             name: 'contract-template-contract',
             requirements: ['id' => '\d+'],
@@ -46,21 +53,23 @@ class ContractTemplate
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['contract-template-list'])]
+    #[Groups(['contract-template-list','contract-template-details'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['contract-template-list'])]
+    #[Groups(['contract-template-list','contract-template-details'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 5)]
-    #[Groups(['contract-template-list'])]
+    #[Groups(['contract-template-list','contract-template-details'])]
     private ?string $languageCode = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['contract-template-details'])]
     private ?string $contractTemplatePath = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['contract-template-details'])]
     private ?string $billTemplatePath = null;
 
     #[ORM\OneToMany(mappedBy: 'contractTemplate', targetEntity: Contract::class)]
@@ -154,7 +163,7 @@ class ContractTemplate
         return $this;
     }
 
-    #[Groups(['contract-template-list'])]
+    #[Groups(['contract-template-list','contract-template-details'])]
     public function getLanguage(): ?string
     {
         try {
