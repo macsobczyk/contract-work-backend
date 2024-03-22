@@ -1,0 +1,200 @@
+{% extends 'contract-template/base.html.twig' %}
+{% block contract %}
+<p align="center">Contract of specific work no. <strong>{{ contract.contractNumber|default("0") }}</strong></p>
+<p align="center">
+    Concluded in <strong>{{ contract.conclusionPlace|default("Conclusion place") }}</strong> on
+    <strong>
+    {% if contract.issuedAt is defined %}
+        {{ contract.issuedAt|date('d.m.Y') }}
+    {% else %}
+        Issued at
+    {% endif %}
+    </strong>, by and between:
+</p>
+<p>
+    <strong>{{ contract.contractor.firstname|default("Firstname") }} {{ contract.contractor.lastname|default("Lastname") }}</strong>
+    residing in
+    <strong>{{ contract.contractor.address.address|default("Address") }}, {{ contract.contractor.address.postCode|default("Postal Code") }} {{ contract.contractor.address.city|default("City") }},
+    {{ contract.contractor.address.country|default("Country") }}</strong>,
+    PESEL: <strong>{{ contract.contractor.pesel|default("PESEL") }}</strong>.
+</p>
+<p>hereinafter referred to as the “<b>Contractor</b>.”</p>
+<p>and</p>
+<p>
+    <strong>{{ contract.company.name|default("Company Name") }}</strong> with its seat in
+    <strong>
+        {{ contract.company.address.address|default("Address") }}, {{ contract.company.address.postCode|default("Postal Code") }} {{ contract.company.address.city|default("City") }},
+        {{ contract.company.address.country|default("Country") }}
+    </strong>,acting based on an entry in the National Register of court No.
+    <strong>{{ contract.company.address.registryNumber|default("Registry Number") }}</strong>
+    represented by:</p>
+<ul>
+    <li><p><strong>
+        {{ contract.representation.position|default("Position") }} - {{ contract.representation.firstname|default("Firstname") }} {{ contract.representation.lastname|default("Lastname") }}
+    </strong></p>
+</ul>
+<p>hereinafter referred to as the “<b>Contracting Party</b>”</p>
+
+
+
+<p align="center"><b>Object of the contract</b></p>
+<p align="center"><b>§ 1</b></p>
+<p>The Contracting Party commissions and the Contractor undertakes to perform the following specific work: <b>{{ contract.subject|default("Przedmiot umowy") }} </b>hereinafter referred to as the “<b>Specific Work</b>.”</p>
+
+<p  align="center" ><b>Representations of the Contractor</b></p>
+<p  align="center" ><b>§ 2</b></p>
+<ol>
+    <li><p>The Contractor represents that it possesses the knowledge, qualifications and skills necessary for the correct performance of the Specific Work.</p>
+    <li><p>The Contractor represents that it will perform the Specific Work with care, dutifully and in a correct manner in accordance with the specificity of the Specific Work as well as the data and guidelines provided either by the Contracting Party or the third party for which the Specific Work is performed.</p>
+    <li><p>The Contractor represents that the Specific Work will be free from physical and legal defects, and in particular that it will not infringe the rights of third parties.</p>
+</ol>
+
+<p  align="center" ><b>Performance of the Specific Work</b></p>
+<p  align="center" ><b>§ 3</b></p>
+<ol>
+    <li><p>The Contractor shall perform the Specific Work in person. The Contractor may not commission the performance of the Specific Work to the third party without a written consent of the Contracting Party. The Contracting Party may stipulate that in order to perform the Specific Work the Contractor shall consult or cooperate with other contractors.</p>
+    <li><p>The Contractor shall provide the Contracting Party with access to the performed Specific Work at each stage of its performance.</p>
+    <li><p>At the request of the Contracting Party, the Contractor shall present the information concerning the progress of the works on the Specific Work. Irrespective of this fact, the Contractor shall immediately inform the Contracting Party in the event of any circumstances that may have an impact on timely performance of the Specific Work.</p>
+    <li><p>The Contracting Party shall provide the Contractor with the materials, papers and documents essential for the performance of the Specific Work.</p>
+</ol>
+
+<p align="center" ><b>Deadline for the performance of Specific Work</b></p>
+<p align="center" ><b>§ 4</b></p>
+<ol>
+    <li><p>The Contractor undertakes to perform the Specific Work and to hand it over to the Contracting Party no later than by
+    <strong>
+        {% if contract.terminatedAt is defined %}
+        {{ contract.terminatedAt|date('d.m.Y') }}
+        {% else %}
+        Date of end of the contract
+        {% endif %}
+        </strong>.
+    </p>
+</ol>
+
+<p  align="center"><b>Copyright transfer</b></p>
+<p  align="center"><b>§ 5</b></p>
+<ol>
+    <li><p>Contracting party is authorized to use of the Specific Work in any way, in particular through the use of the Specific Work in other works, including audiovisual works, in any thematic context.</p>
+    <li><p>Upon accepting the Specific Work, the Author grants the Purchaser consent to free and exclusive use of the proprietary copyrights to the Work on all fields of exploitation existing at the time of concluding this Agreement, and in particular in the fields of exploitation listed in art. 50 of the Act on Copyright and Related Rights, i.e</p>
+    <ol type="a">
+        <li><p>fixation,</p>
+        <li><p>reproduction by any technique,</p>
+        <li><p>placing on the any media, including INTERNET network media,</p>
+        <li><p>entering into computer memory,</p>
+        <li><p>public performance,</p>
+        <li><p>public presentation,</p>
+        <li><p>renting,</p>
+        <li><p>displaying,</p>
+        <li><p>broadcasting using a wired or wireless video or audio via a ground station or via satellite,</p>
+        <li><p>simultaneous and integral broadcasting by another radio or television organization.</p>
+    </ol>
+    <li><p>The scope of acquired rights will enable the exploitation of the Work indefinitely from the date of accepting the Work by the Employer on the territory of the Republic of Poland, with the proviso that if the range of the broadcasting station broadcasting the program from the territory of the Republic of Poland exceeds
+    this territory, such exceeding is not considered a violation of this Agreement.</p>
+    <li><p>The Employer has the right to make and use studies of the Work in the form of alterations, fragmentation, reassembly, and take all other actions as part of any actions taken by the Employer even if the effect of these actions would be the loss of individual
+    character given to the Work by the Author. The cancellation of the above permit will depend on the submission by the Author of an appropriate deposit to cover the costs caused by the effects of the appeal.</p>
+    <li><p>The author authorizes the Ordering Party to decide on the date of making the Work available to the public for the first time and allows the author's surname and first name to be omitted as part of the exploitation of the Work.</p>
+</ol>
+
+<p align="center"><b>Remuneration</b></p>
+<p align="center"><b>§ 6</b></p>
+<ol start="6">
+    <li><p>For the performance of this contract the Contracting Party shall pay the Contractor the lump-sum remuneration of
+        <strong>
+            {% if contract.valueGross is defined %}
+            {{ (contract.valueGross / 100)|number_format(2,',',' ') }}
+            {% else %}
+            The amount of remuneration
+            {% endif %}
+             PLN
+        </strong>
+        (say: <strong>{{ inWords|default("The amount of remuneration in words") }}</strong>)
+        Polish zlotys less due regulatory liabilities arising from applicable provisions of the law.</p>
+    <li><p>The remuneration of the Contractor shall be payable within 7 days after the Contracting Party accepts the Specific Work without reservation. The remuneration shall be payable based on a correctly issued bill provided to the Contracting Party by bank transfer.</p>
+</ol>
+
+<p align="center"><b>Final provisions</b></p>
+<p align="center"><b>§ 7</b></p>
+<ol>
+    <li><p>All matters unregulated herein shall be governed by the provisions of applicable law, particularly the Civil Code.</p>
+    <li><p>Any disputes arising from this contract shall be examined by a competent common court having jurisdiction over the seat of the Contracting Party.</p>
+    <li><p>Any amendments to this contract shall be made in writing in order to be effective.</p>
+    <li><p>The contract has been prepared in two identical copies, one copy for each party.</p>
+</ol>
+<table width="100%" cellpadding="0"cellspacing="0" align="center" border="0">
+    <tr>
+        <td style="height:2.5cm!important;">&nbsp;</td>
+        <td style="height:2.5cm!important;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td style="text-align:center!important;">Contracting Party</td>
+        <td style="text-align:center!important;">Contractor</td>
+    </tr>
+</table>
+<p style="page-break-before:always!important;"><strong>Information clause on data processing to the employment contract</strong></p>
+<p>Following the entry into force of Regulation (EU) 2016/679 of the European Parliament and of the Council of 27th April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (hereinafter referred to as “RODO”), we hereby inform that:</p>
+<ol>
+    <li>
+        <p><a name="__DdeLink__1298_3324552145"></a>
+            The administrator of my personal data processed under this contract for a specific task is
+            <strong>{{ contract.company.name|default("Company Name") }}</strong>,
+            <strong>
+                {{ contract.company.address.address|default("Address") }}, {{ contract.company.address.postCode|default("Postal Code") }} {{ contract.company.address.city|default("City") }},
+                {{ contract.company.address.country|default("Country") }}
+            </strong>,
+            NIP (Tax Identification Number):
+            <strong>
+                {{ contract.company.vatin|default("NIP") }}
+            </strong>,
+            KRS (National Court Register) number:
+            <strong>
+                {{ contract.company.registryNumber|default("KRS Number") }}
+            </strong>
+        </p>
+    </li>
+    <li>
+        <p><strong>{{ contract.company.name|default("Company Name") }}</strong> has appointed a data protection officer who can be contacted via email:
+            <strong><strong>{{ contract.company.dpoEmailAddress|default("DPO Email Address") }}</strong></strong>.
+        </p>
+    </li>
+    <li>
+        <p>My personal data will be processed for the following purposes:</p>
+        <ol>
+            <li>
+                <p>Necessary for the conclusion and performance of the contract between me and
+                    {{ contract.company.name|default("Company Name") }}, based on Article
+                    6(1)(b) of Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (General Data Protection Regulation), hereinafter referred to as GDPR.
+                </p>
+            </li>
+            <li><p>To fulfill tax or accounting reporting obligations, based on Article 6(1)(c) of the GDPR;</p></li>
+            <li><p>Necessary for establishing, exercising, or defending legal claims, including compensation claims related to the aforementioned contract, as well as responding to your requests, inquiries, or complaints, and responding in ongoing proceedings (legitimate interest of the controller), based on Article 6(1)(f) of the GDPR.</p></li>
+        </ol>
+    </li>
+    <li><p>Your personal data will not be transferred to countries outside the European Economic Area.</p></li>
+    <li><p>Due to the processing of data for the purposes indicated above, your personal data may be disclosed to other recipients or categories of personal data recipients.</p></li>
+    <li>
+        <p>Recipients of your data may include:</p>
+        <ol>
+            <li>
+                <p>Other entities authorized to receive your personal data under the relevant provisions of law, including the Tax Office, Social Security Institution, Bank,</p>
+            </li>
+            <li>
+                <p>Entities providing services to {{ contract.company.name|default("Company Name") }}, including entities providing courier and mail delivery services, entities providing computer software or software maintenance services,</p>
+            </li>
+            <li>
+                <p>Public authorities or entities authorized to obtain data under applicable law (e.g., courts, law enforcement authorities, government institutions, etc.) upon request, based on the appropriate legal basis.</p>
+            </li>
+            <li>
+                <p>Other entities processing your personal data on behalf of the Controller based on a data processing agreement concluded (so-called processors).</p>
+            </li>
+        </ol>
+    </li>
+    <li><p>Your personal data will be processed for the entire duration of the contract and thereafter - until the expiry of the limitation period for claims arising from the contract, resulting from the Civil Code, as well as for the period specified by law in connection with the performance of tax, accounting, insurance, and archival obligations. After this period, personal data will be deleted.</p></li>
+    <li><p>You have the right to access your data, the right to rectify, delete, limit processing, the right to data portability, and the right to object to processing.</p></li>
+    <li><p>You have the right to lodge a complaint with the President of the Office for Personal Data Protection if you believe that the processing of your personal data violates the provisions of the GDPR.</p></li>
+    <li><p>Providing your personal data is voluntary but necessary for the conclusion and performance of the contract. In case of refusal to provide data, it will not be possible to achieve the individual purposes mentioned above.</p></li>
+    <li><p>Processing of personal data will not be subject to automated decision-making, including profiling, referred to in Article 22(1) and (4) of the GDPR.</p></li>
+</ol>
+<p>………………………………………………….. (date, fullname)</p>
+{% endblock %}
+
