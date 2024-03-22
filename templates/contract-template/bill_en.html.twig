@@ -9,19 +9,19 @@
     <colgroup width="24"></colgroup>
     <colgroup span="2" width="132"></colgroup>
     <tr>
-        <td height="13" align="left" colspan="3"><strong>Wystawca</strong></td>
+        <td height="13" align="left" colspan="3"><strong>Issuer</strong></td>
         <td align="left"><br></td>
         <td align="left"><br></td>
         <td align="left"><br></td>
     </tr>
     <tr>
-        <td height="19" align="left" colspan="3"><strong>{{ contract.contractor.firstname|default("Imię") }} {{ contract.contractor.lastname|default("Nazwisko") }}</strong></td>
-        <td align="right" colspan="3"><strong><font size=4>Rachunek do umowy o dzieło</font></strong></td>
+        <td height="19" align="left" colspan="3"><strong>{{ contract.contractor.firstname|default("Firstname") }} {{ contract.contractor.lastname|default("Lastname") }}</strong></td>
+        <td align="right" colspan="3"><strong><font size=4>Invoice for a work contract</font></strong></td>
     </tr>
     <tr>
         <td height="13" align="left" colspan="3">
-            {{ contract.contractor.address.address|default("Adres") }}, {{ contract.contractor.address.postCode|default("kod pocztowy") }} {{ contract.contractor.address.city|default("miasto") }},
-            {{ contract.contractor.address.country|default("państwo") }}
+            {{ contract.contractor.address.address|default("Address") }}, {{ contract.contractor.address.postCode|default("post code") }} {{ contract.contractor.address.city|default("city") }},
+            {{ contract.contractor.address.country|default("country") }}
         </td>
         <td align="left"><br></td>
         <td align="left"><br></td>
@@ -50,21 +50,21 @@
         <td align="left"><br></td>
     </tr>
     <tr>
-        <td height="13" align="left" colspan="3"><strong>Odbiorca</strong></td>
+        <td height="13" align="left" colspan="3"><strong>Recipient</strong></td>
         <td align="left"><br></td>
         <td align="left"><br></td>
         <td align="left"><br></td>
     </tr>
     <tr>
         <td height="13" align="left" colspan="3">
-            <strong>{{ contract.company.name|default("Nazwa firmy") }}</strong>
+            <strong>{{ contract.company.name|default("Company name") }}</strong>
         </td>
         <td align="left"><br></td>
         <td class="borderded-cell gray-bg" align="center">
-            <strong>Nr rachunku</strong>
+            <strong>Invoice number</strong>
         </td>
         <td class="borderded-cell gray-bg" align="center">
-            <strong>Data</strong>
+            <strong>Date</strong>
         </td>
     </tr>
     <tr>
@@ -74,14 +74,14 @@
         </td>
         <td align="left"><br></td>
         <td class="borderded-cell" align="center">
-            {{ contract.contractNumber|default("Nr rachunku") }}
+            {{ contract.contractNumber|default("Invoice number") }}
         </td>
         <td class="borderded-cell" align="center" sdval="43924" sdnum="1033;0;D/MM/YYYY">
             <strong>
             {% if contract.paidAt is defined %}
             {{ contract.paidAt|date('d.m.Y') }}
             {% else %}
-            Data wystawienia
+            Issuance date
             {% endif %}
             </strong>
         </td>
@@ -102,34 +102,34 @@
     </tr>
     <tr>
         <td class="borderded-cell gray-bg vertical-align-middle" colspan=5 height="15" align="center">
-            <strong>Opis</strong>
+            <strong>Description</strong>
         </td>
         <td class="borderded-cell gray-bg" align="center">
-            <strong>Kwota brutto</strong>
+            <strong>Gross amount</strong>
         </td>
     </tr>
     <tr>
         <td class="borderded-cell vertical-align-middle" colspan=5 height="48" align="left">
-            {{ contract.subject|default("Przedmiot umowy") }}
+            {{ contract.subject|default("Subject of the contract") }}
         </td>
         <td class="borderded-cell" align="right">
             {% if contract.valueGross is defined %}
             {{ (contract.valueGross / 100)|number_format(2,',',' ') }}
             {% else %}
-            Kwota brutto
+            Gross amount
             {% endif %}
             zł
         </td>
     </tr>
     <tr>
         <td class="borderded-cell vertical-align-middle" colspan=5 height="15" align="right">
-            <strong>ŁĄCZNIE:</strong>
+            <strong>TOTAL:</strong>
         </td>
         <td class="borderded-cell" align="right">
             {% if contract.valueGross is defined %}
             {{ (contract.valueGross / 100)|number_format(2,',',' ') }}
             {% else %}
-            Razem brutto
+            Total gross
             {% endif %}
             zł
         </td>
@@ -152,46 +152,46 @@
     </tr>
     <tr>
         <td class="borderded-cell gray-bg vertical-align-middle" colspan=5 height="15" align="center">
-            <strong>Rozliczenie</strong>
+            <strong>Settlement</strong>
         </td>
         <td class="borderded-cell gray-bg" align="center">
-            <strong>Kwota</strong>
+            <strong>Amount</strong>
         </td>
     </tr>
     <tr>
         <td class="borderded-cell vertical-align-middle" colspan=5 height="13" align="right">
-            Wartość brutto:
+            Gross value:
         </td>
         <td class="borderded-cell" align="right">
             {% if contract.valueGross is defined %}
             {{ (contract.valueGross / 100)|number_format(2,',',' ') }}
             {% else %}
-            Razem brutto
+            Total gross
             {% endif %}
             zł
         </td>
     </tr>
     <tr>
         <td class="borderded-cell vertical-align-middle" colspan=5 height="13" align="right">
-            Koszty uzyskania przychodu (50%)
+            Income acquisition costs (50%)
         </td>
         <td class="borderded-cell" align="right">
             {% if contract.valueGross is defined %}
             {{ (contract.valueGross / 200)|number_format(2,',',' ') }}
             {% else %}
-            Koszty uzyskania
+            Income acquisition costs
             {% endif %}
         </td>
     </tr>
     <tr>
         <td class="borderded-cell vertical-align-middle" colspan=5 height="13" align="right">
-            Zaliczka na podatek:
+            Tax advance:
         </td>
         <td class="borderded-cell" align="right">
             {% if contract.valueTax is defined %}
             {{ (contract.valueTax / 100)|number_format(2,',',' ') }}
             {% else %}
-            Kwota podatku
+            Tax amount
             {% endif %}
             zł
         </td>
@@ -204,7 +204,7 @@
             {% if contract.valueNet is defined %}
             {{ (contract.valueNet / 100)|number_format(2,',',' ') }}
             {% else %}
-            Do wypłaty
+            To be paid out
             {% endif %}
             zł
         </td>
@@ -271,7 +271,7 @@
         <td align="left"><br></td>
         <td align="left"><br></td>
         <td align="left"><br></td>
-        <td align="center">podpis wystawcy</td>
+        <td align="center">Issuer's signature</td>
     </tr>
     <tr>
         <td height="13" align="left"><br></td>
@@ -307,7 +307,7 @@
     </tr>
     <tr>
         <td height="15" align="left" colspan="6">
-            Rachunek bankowy: {{ contract.contractrorBankAccout.bankName|default("Bank") }} {{ contract.contractrorBankAccout.accountNumber|default("Numer rachunku") }}
+            Bank account: {{ contract.contractrorBankAccout.bankName|default("Bank") }} {{ contract.contractrorBankAccout.accountNumber|default("Numer rachunku") }}
         </td>
     </tr>
 </table>
