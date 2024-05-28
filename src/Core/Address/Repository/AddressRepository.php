@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace App\Address\Model\Repository;
 
-use App\Entity\Address;
+use App\Address\Model\Address;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Address[]    findAll()
  * @method Address[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AddressRepository extends ServiceEntityRepository
+class AddressRepository extends ServiceEntityRepository implements AddressRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

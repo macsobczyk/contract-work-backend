@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Entity;
+namespace App\Core\Contract\Model;
 
-use App\Repository\ContractAttachmentRepository;
+use App\Repository\ContractResultRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ContractAttachmentRepository::class)]
-class ContractAttachment
+#[ORM\Entity(repositoryClass: ContractResultRepository::class)]
+class ContractResult
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'attachments')]
+    #[ORM\ManyToOne(inversedBy: 'resultFiles')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Contract $contract = null;
 

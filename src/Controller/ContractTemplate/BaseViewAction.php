@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\ContractTemplate;
 
-use App\Entity\ContractTemplate;
+use App\Core\ContractTemplate\Model\ContractTemplate;
 use Knp\Snappy\Pdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

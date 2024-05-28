@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Entity;
+namespace App\Core\ContractTemplate\Model;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use App\Controller\ContractTemplate\ViewContractTemplateAction;
 use App\Controller\ContractTemplate\ViewBillTemplateAction;
+use App\Core\Contract\Model\Contract;
+use App\Core\User\Model\Role;
 use App\Repository\ContractTemplateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Core\User\Model;
 
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
@@ -8,6 +8,10 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use App\Core\Address\Model\Address;
+use App\Core\BankAccount\Model\BankAccount;
+use App\Core\Company\Model\CompanyRepresentation;
+use App\Core\Contract\Model\Contract;
 use App\Filter as CustomFilter;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;

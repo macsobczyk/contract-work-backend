@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Entity;
+namespace App\Company\Model;
 
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use App\Core\Address\Model\Address;
+use App\Core\Company\Model\CompanyRepresentation;
+use App\Core\User\Model\Role;
+use App\Core\Contract\Model\Contract;
 use App\Filter as CustomFilter;
 use App\Repository\CompanyRepository;
 use App\Security\Voter\CompanyVoter;
@@ -15,7 +19,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ORM\Entity(repositoryClass: CompanyRepository::class)]
+#[ORM\Entity(repositoryClass: CompanyManager::class)]
 #[ApiResource(
     operations: [
         new Get(

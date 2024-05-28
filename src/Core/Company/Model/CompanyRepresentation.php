@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Entity;
+namespace App\Core\Company\Model;
 
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use App\Core\Company\Model\Company;
+use App\Core\User\Model\User;
 use App\Filter as CustomFilter;
 use App\Repository\CompanyRepresentationRepository;
 use App\Security\Voter\CompanyRepresentationVoter;

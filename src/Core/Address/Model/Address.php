@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Core\Address\Model;
 
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
@@ -8,14 +8,17 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use App\Core\Address\Repository\AddressManager;
+use App\Core\Company\Model\Company;
+use App\Core\User\Model\Role;
+use App\Core\User\Model\User;
 use App\Filter as CustomFilter;
-use App\Repository\AddressRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Intl\Countries;
 use \RuntimeException;
 
-#[ORM\Entity(repositoryClass: AddressRepository::class)]
+#[ORM\Entity(repositoryClass: AddressManager::class)]
 #[ApiResource(
     operations: [
         new Get(

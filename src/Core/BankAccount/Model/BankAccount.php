@@ -1,20 +1,23 @@
 <?php
 
-namespace App\Entity;
+namespace App\Core\BankAccount\Model;
 
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use App\Core\BankAccount\Repository\BankAccountManager;
+use App\Core\Contract\Model\Contract;
+use App\Core\User\Model\Role;
+use App\Core\User\Model\User;
 use App\Filter as CustomFilter;
-use App\Repository\BankAccountRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ORM\Entity(repositoryClass: BankAccountRepository::class)]
+#[ORM\Entity(repositoryClass: BankAccountManager::class)]
 #[ApiResource(
     operations: [
         new Get(

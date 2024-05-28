@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Entity;
+namespace App\Core\Contract\Model;
 
-use App\Repository\ContractResultRepository;
+use App\Repository\ContractMetaRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ContractResultRepository::class)]
-class ContractResult
+#[ORM\Entity(repositoryClass: ContractMetaRepository::class)]
+class ContractMeta
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'resultFiles')]
+    #[ORM\ManyToOne(inversedBy: 'contractMeta')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Contract $contract = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $description = null;
+    private ?string $fieldName = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $filePath = null;
+    private ?string $fieldValue = null;
 
     public function getId(): ?int
     {
@@ -40,26 +40,26 @@ class ContractResult
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getFieldName(): ?string
     {
-        return $this->description;
+        return $this->fieldName;
     }
 
-    public function setDescription(string $description): static
+    public function setFieldName(string $fieldName): static
     {
-        $this->description = $description;
+        $this->fieldName = $fieldName;
 
         return $this;
     }
 
-    public function getFilePath(): ?string
+    public function getFieldValue(): ?string
     {
-        return $this->filePath;
+        return $this->fieldValue;
     }
 
-    public function setFilePath(string $filePath): static
+    public function setFieldValue(string $fieldValue): static
     {
-        $this->filePath = $filePath;
+        $this->fieldValue = $fieldValue;
 
         return $this;
     }

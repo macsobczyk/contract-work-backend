@@ -1,9 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace App\Core\Contract\Model;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ContractRepository;
+use App\Core\BankAccount\Model\BankAccount;
+use App\Core\Company\Model\Company;
+use App\Core\ContractTemplate\Model\ContractTemplate;
+use App\Core\User\Model\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;

@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\BankAccount;
+use App\Core\BankAccount\Model\BankAccount;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method BankAccount[]    findAll()
  * @method BankAccount[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class BankAccountRepository extends ServiceEntityRepository
+class BankAccountRepository extends ServiceEntityRepository implements BankAccountRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
