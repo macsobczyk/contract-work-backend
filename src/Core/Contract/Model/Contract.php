@@ -15,8 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ContractRepository::class)]
 #[ApiResource]
-class Contract
-{
+class Contract {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -96,241 +95,201 @@ class Contract
     #[ORM\Column(length: 255)]
     private ?string $conclusionPlace = null;
 
-    public function __construct()
-    {
-        $this->resultFiles = new ArrayCollection();
-        $this->attachments = new ArrayCollection();
+    public function __construct() {
+        $this->resultFiles  = new ArrayCollection();
+        $this->attachments  = new ArrayCollection();
         $this->contractMeta = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getCompany(): ?Company
-    {
+    public function getCompany(): ?Company {
         return $this->company;
     }
 
-    public function setCompany(?Company $company): static
-    {
+    public function setCompany(?Company $company): static {
         $this->company = $company;
 
         return $this;
     }
 
-    public function getRepresentation(): ?User
-    {
+    public function getRepresentation(): ?User {
         return $this->representation;
     }
 
-    public function setRepresentation(?User $representation): static
-    {
+    public function setRepresentation(?User $representation): static {
         $this->representation = $representation;
 
         return $this;
     }
 
-    public function getContractor(): ?User
-    {
+    public function getContractor(): ?User {
         return $this->contractor;
     }
 
-    public function setContractor(?User $contractor): static
-    {
+    public function setContractor(?User $contractor): static {
         $this->contractor = $contractor;
 
         return $this;
     }
 
-    public function getContractorBankAccount(): ?BankAccount
-    {
+    public function getContractorBankAccount(): ?BankAccount {
         return $this->contractorBankAccount;
     }
 
-    public function setContractorBankAccount(?BankAccount $contractorBankAccount): static
-    {
+    public function setContractorBankAccount(?BankAccount $contractorBankAccount): static {
         $this->contractorBankAccount = $contractorBankAccount;
 
         return $this;
     }
 
-    public function getContractTemplate(): ?ContractTemplate
-    {
+    public function getContractTemplate(): ?ContractTemplate {
         return $this->contractTemplate;
     }
 
-    public function setContractTemplate(?ContractTemplate $contractTemplate): static
-    {
+    public function setContractTemplate(?ContractTemplate $contractTemplate): static {
         $this->contractTemplate = $contractTemplate;
 
         return $this;
     }
 
-    public function getContractNumber(): ?string
-    {
+    public function getContractNumber(): ?string {
         return $this->contractNumber;
     }
 
-    public function setContractNumber(string $contractNumber): static
-    {
+    public function setContractNumber(string $contractNumber): static {
         $this->contractNumber = $contractNumber;
 
         return $this;
     }
 
-    public function getIssuedAt(): ?\DateTimeInterface
-    {
+    public function getIssuedAt(): ?\DateTimeInterface {
         return $this->issuedAt;
     }
 
-    public function setIssuedAt(\DateTimeInterface $issuedAt): static
-    {
+    public function setIssuedAt(\DateTimeInterface $issuedAt): static {
         $this->issuedAt = $issuedAt;
 
         return $this;
     }
 
-    public function getTerminatedAt(): ?\DateTimeInterface
-    {
+    public function getTerminatedAt(): ?\DateTimeInterface {
         return $this->terminatedAt;
     }
 
-    public function setTerminatedAt(?\DateTimeInterface $terminatedAt): static
-    {
+    public function setTerminatedAt(?\DateTimeInterface $terminatedAt): static {
         $this->terminatedAt = $terminatedAt;
 
         return $this;
     }
 
-    public function getPaidAt(): ?\DateTimeInterface
-    {
+    public function getPaidAt(): ?\DateTimeInterface {
         return $this->paidAt;
     }
 
-    public function setPaidAt(?\DateTimeInterface $paidAt): static
-    {
+    public function setPaidAt(?\DateTimeInterface $paidAt): static {
         $this->paidAt = $paidAt;
 
         return $this;
     }
 
-    public function getContractValueNet(): ?int
-    {
+    public function getContractValueNet(): ?int {
         return $this->contractValueNet;
     }
 
-    public function setContractValueNet(int $contractValueNet): static
-    {
+    public function setContractValueNet(int $contractValueNet): static {
         $this->contractValueNet = $contractValueNet;
 
         return $this;
     }
 
-    public function getContractValueGross(): ?int
-    {
+    public function getContractValueGross(): ?int {
         return $this->contractValueGross;
     }
 
-    public function setContractValueGross(int $contractValueGross): static
-    {
+    public function setContractValueGross(int $contractValueGross): static {
         $this->contractValueGross = $contractValueGross;
 
         return $this;
     }
 
-    public function getContractValueTax(): ?int
-    {
+    public function getContractValueTax(): ?int {
         return $this->contractValueTax;
     }
 
-    public function setContractValueTax(int $contractValueTax): static
-    {
+    public function setContractValueTax(int $contractValueTax): static {
         $this->contractValueTax = $contractValueTax;
 
         return $this;
     }
 
-    public function getSubject(): ?string
-    {
+    public function getSubject(): ?string {
         return $this->subject;
     }
 
-    public function setSubject(string $subject): static
-    {
+    public function setSubject(string $subject): static {
         $this->subject = $subject;
 
         return $this;
     }
 
-    public function getResults(): ?string
-    {
+    public function getResults(): ?string {
         return $this->results;
     }
 
-    public function setResults(?string $results): static
-    {
+    public function setResults(?string $results): static {
         $this->results = $results;
 
         return $this;
     }
 
-    public function isIsPaid(): ?bool
-    {
+    public function isIsPaid(): ?bool {
         return $this->isPaid;
     }
 
-    public function setIsPaid(bool $isPaid): static
-    {
+    public function setIsPaid(bool $isPaid): static {
         $this->isPaid = $isPaid;
 
         return $this;
     }
 
-    public function isIsTaxPaid(): ?bool
-    {
+    public function isIsTaxPaid(): ?bool {
         return $this->isTaxPaid;
     }
 
-    public function setIsTaxPaid(bool $isTaxPaid): static
-    {
+    public function setIsTaxPaid(bool $isTaxPaid): static {
         $this->isTaxPaid = $isTaxPaid;
 
         return $this;
     }
 
-    public function isIsUndersigned(): ?bool
-    {
+    public function isIsUndersigned(): ?bool {
         return $this->isUndersigned;
     }
 
-    public function setIsUndersigned(bool $isUndersigned): static
-    {
+    public function setIsUndersigned(bool $isUndersigned): static {
         $this->isUndersigned = $isUndersigned;
 
         return $this;
     }
 
-    public function isIsBooked(): ?bool
-    {
+    public function isIsBooked(): ?bool {
         return $this->isBooked;
     }
 
-    public function setIsBooked(bool $isBooked): static
-    {
+    public function setIsBooked(bool $isBooked): static {
         $this->isBooked = $isBooked;
 
         return $this;
     }
 
-    public function isIsResultDelivered(): ?bool
-    {
+    public function isIsResultDelivered(): ?bool {
         return $this->isResultDelivered;
     }
 
-    public function setIsResultDelivered(bool $isResultDelivered): static
-    {
+    public function setIsResultDelivered(bool $isResultDelivered): static {
         $this->isResultDelivered = $isResultDelivered;
 
         return $this;
@@ -339,13 +298,11 @@ class Contract
     /**
      * @return Collection<int, ContractResult>
      */
-    public function getResultFiles(): Collection
-    {
+    public function getResultFiles(): Collection {
         return $this->resultFiles;
     }
 
-    public function addResultFile(ContractResult $resultFile): static
-    {
+    public function addResultFile(ContractResult $resultFile): static {
         if (!$this->resultFiles->contains($resultFile)) {
             $this->resultFiles->add($resultFile);
             $resultFile->setContract($this);
@@ -354,11 +311,9 @@ class Contract
         return $this;
     }
 
-    public function removeResultFile(ContractResult $resultFile): static
-    {
+    public function removeResultFile(ContractResult $resultFile): static {
         if ($this->resultFiles->removeElement($resultFile) && $resultFile->getContract() === $this) {
-                $resultFile->setContract(null);
-            }
+            $resultFile->setContract(null);
         }
 
         return $this;
@@ -367,13 +322,11 @@ class Contract
     /**
      * @return Collection<int, ContractAttachment>
      */
-    public function getAttachments(): Collection
-    {
+    public function getAttachments(): Collection {
         return $this->attachments;
     }
 
-    public function addAttachment(ContractAttachment $attachment): static
-    {
+    public function addAttachment(ContractAttachment $attachment): static {
         if (!$this->attachments->contains($attachment)) {
             $this->attachments->add($attachment);
             $attachment->setContract($this);
@@ -382,11 +335,9 @@ class Contract
         return $this;
     }
 
-    public function removeAttachment(ContractAttachment $attachment): static
-    {
+    public function removeAttachment(ContractAttachment $attachment): static {
         if ($this->attachments->removeElement($attachment) && $attachment->getContract() === $this) {
-                $attachment->setContract(null);
-            }
+            $attachment->setContract(null);
         }
 
         return $this;
@@ -395,13 +346,11 @@ class Contract
     /**
      * @return Collection<int, ContractMeta>
      */
-    public function getContractMeta(): Collection
-    {
+    public function getContractMeta(): Collection {
         return $this->contractMeta;
     }
 
-    public function addContractMetum(ContractMeta $contractMetum): static
-    {
+    public function addContractMetum(ContractMeta $contractMetum): static {
         if (!$this->contractMeta->contains($contractMetum)) {
             $this->contractMeta->add($contractMetum);
             $contractMetum->setContract($this);
@@ -410,23 +359,19 @@ class Contract
         return $this;
     }
 
-    public function removeContractMetum(ContractMeta $contractMetum): static
-    {
+    public function removeContractMetum(ContractMeta $contractMetum): static {
         if ($this->contractMeta->removeElement($contractMetum) && $contractMetum->getContract() === $this) {
-                $contractMetum->setContract(null);
-            }
+            $contractMetum->setContract(null);
         }
 
         return $this;
     }
 
-    public function getConclusionPlace(): ?string
-    {
+    public function getConclusionPlace(): ?string {
         return $this->conclusionPlace;
     }
 
-    public function setConclusionPlace(string $conclusionPlace): static
-    {
+    public function setConclusionPlace(string $conclusionPlace): static {
         $this->conclusionPlace = $conclusionPlace;
 
         return $this;

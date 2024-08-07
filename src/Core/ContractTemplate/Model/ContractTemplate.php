@@ -144,18 +144,15 @@ class ContractTemplate {
         if ($this->contracts->removeElement($contract) && $contract->getContractTemplate() === $this) {
             $contract->setContractTemplate(null);
         }
+        return $this;
     }
 
-return $this;
-}
-
-#[
-Groups(['contract-template-list', 'contract-template-details'])]
-    public function getLanguage(): ?string {
-    try {
-        return Languages::getName($this->languageCode);
-    } catch (RuntimeException $e) {
-        return null;
+    #[Groups(['contract-template-list', 'contract-template-details'])]
+        public function getLanguage(): ?string {
+        try {
+            return Languages::getName($this->languageCode);
+        } catch (RuntimeException $e) {
+            return null;
+        }
     }
-}
 }
