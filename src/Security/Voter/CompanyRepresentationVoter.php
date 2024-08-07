@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Security\Voter;
 
-use App\Entity\CompanyRepresentation;
-use App\Entity\Role;
+use App\Core\Company\Model\CompanyRepresentation;
+use App\Core\User\Model\Role;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -23,14 +23,8 @@ class CompanyRepresentationVoter extends Voter
      * @param string $attribute
      * @param CompanyRepresentation $subject
      */
-    protected function supports($attribute, $subject): bool
-    {
-        $supportsAttribute = in_array(
-            $attribute, [
-                self::COMPANY_REPRESENTATION_GET
-            ],
-            true
-        );
+    protected function supports(string $attribute, $subject): bool {
+        $supportsAttribute = in_array($attribute, [self::COMPANY_REPRESENTATION_GET], true);
 
         $supportsSubject = $subject instanceof CompanyRepresentation;
         return $supportsAttribute && $supportsSubject;
@@ -46,7 +40,7 @@ class CompanyRepresentationVoter extends Voter
     {
         return match($attribute)
         {
-            self::COMPANY_REPRESENTATION_GET => $this->security->isGranted(Role::ROLE_ADMIN) or $this->canRead($subject),
+            self::COMPANY_REPRESENTATION_GET => $this->security->isGranted(Role::ROLE_ADMIN) || $this->canRead($subject),
             default => false
         };
     }
@@ -58,8 +52,7 @@ class CompanyRepresentationVoter extends Voter
      */
     private function canRead(CompanyRepresentation $subject): bool
     {
-        return $this->security->isGranted(Role::ROLE_REPRESENTATIVE) and $subject->getCompanyUser() === $this->security->getUser();
-        return false;
+        return $this->security->isGranted(Role::ROLE_REPRESENTATIVE) && $subject->getCompanyUser() === $this->security->getUser();
     }
 }
 

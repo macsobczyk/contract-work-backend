@@ -2,7 +2,7 @@
 
 namespace App\Core\Contract\Model;
 
-use App\Repository\ContractResultRepository;
+use App\Core\Contract\Repository\ContractResultRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ContractResultRepository::class)]

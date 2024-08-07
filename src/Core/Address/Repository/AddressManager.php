@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 namespace App\Core\Address\Repository;
 
-final class AddressManager 
+final class AddressManager
 {
     public function __construct(
         private AddressRepositoryInterface $repository

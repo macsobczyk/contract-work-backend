@@ -7,7 +7,7 @@ namespace App\Filter;
 use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
-use App\Entity\User;
+use App\Core\User\Model\User;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\PropertyInfo\Type;
 
@@ -21,8 +21,8 @@ final class UserRoleSearchFilter extends AbstractFilter
      */
     protected function filterProperty(string $property, $value, QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, Operation $operation = null, array $context = []): void
     {
-        if (!$this->isPropertyEnabled($property, $resourceClass)
-            || !($resourceClass === User::class and $property === User::USER_ROLE_SEARCH)
+        if (!($resourceClass === User::class && $property === User::USER_ROLE_SEARCH)
+            || !$this->isPropertyEnabled($property, $resourceClass)
         ) {
             return;
         }

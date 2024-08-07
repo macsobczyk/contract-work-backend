@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-namespace App\Core\BankAccount\Model;
+namespace App\Core\BankAccount\Repository;
 
 interface BankAccountRepositoryInterface
 {

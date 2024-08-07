@@ -2,7 +2,7 @@
 
 namespace App\Core\Contract\Model;
 
-use App\Repository\ContractMetaRepository;
+use App\Core\Contract\Repository\ContractMetaRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ContractMetaRepository::class)]

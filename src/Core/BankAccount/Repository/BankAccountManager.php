@@ -1,8 +1,10 @@
-<?php 
+<?php
 
-namespace App\Core\BankAccount\Model;
+namespace App\Core\BankAccount\Repository;
 
-final class BankAccountManager 
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
+final class BankAccountManager
 {
     public function __construct(
         private BankAccountRepositoryInterface $repository

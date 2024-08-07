@@ -7,7 +7,7 @@ namespace App\Filter;
 use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
-use App\Core\Address\Model;
+use App\Core\Address\Model\Address;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\PropertyInfo\Type;
 
@@ -15,8 +15,8 @@ final class AddressKeywordSearchFilter extends AbstractFilter
 {
     protected function filterProperty(string $property, $value, QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, Operation $operation = null, array $context = []): void
     {
-        if (!$this->isPropertyEnabled($property, $resourceClass)
-            || !($resourceClass === Address::class and $property === Address::ADDRESS_KEYWORD_SEARCH)
+        if (!($resourceClass === Address::class && $property === Address::ADDRESS_KEYWORD_SEARCH)
+            || !$this->isPropertyEnabled($property, $resourceClass)
         ) {
             return;
         }

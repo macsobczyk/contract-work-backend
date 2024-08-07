@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Security\Voter;
 
-use App\Entity\Company;
-use App\Entity\Role;
+use App\Core\Company\Model\Company;
+use App\Core\User\Model\Role;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -23,14 +23,8 @@ class CompanyVoter extends Voter
      * @param string $attribute
      * @param Company $subject
      */
-    protected function supports($attribute, $subject): bool
-    {
-        $supportsAttribute = in_array(
-            $attribute, [
-                self::COMPANY_GET
-            ],
-            true
-        );
+    protected function supports(string $attribute, $subject): bool {
+        $supportsAttribute = in_array($attribute, [self::COMPANY_GET], true);
 
         $supportsSubject = $subject instanceof Company;
         return $supportsAttribute && $supportsSubject;
@@ -42,11 +36,11 @@ class CompanyVoter extends Voter
      * @param TokenInterface $token
      * @return bool
      */
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
+    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
         return match($attribute)
         {
-            self::COMPANY_GET => $this->security->isGranted(Role::ROLE_ADMIN) or $this->canRead($subject),
+            self::COMPANY_GET => $this->security->isGranted(Role::ROLE_ADMIN) || $this->canRead($subject),
             default => false
         };
     }

@@ -1,9 +1,8 @@
-<?php 
+<?php
 
 namespace App\Core\Company\Repository;
 
-use App\Core\Company\Repository\CompanyRepositoryInterface;
-
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 class CompanyManager
 {
     public function __construct(

@@ -3,7 +3,7 @@
 namespace App\Core\Contract\Model;
 
 use ApiPlatform\Metadata\ApiResource;
-use App\Repository\ContractRepository;
+use App\Core\Contract\Repository\ContractRepository;
 use App\Core\BankAccount\Model\BankAccount;
 use App\Core\Company\Model\Company;
 use App\Core\ContractTemplate\Model\ContractTemplate;
@@ -356,9 +356,7 @@ class Contract
 
     public function removeResultFile(ContractResult $resultFile): static
     {
-        if ($this->resultFiles->removeElement($resultFile)) {
-            // set the owning side to null (unless already changed)
-            if ($resultFile->getContract() === $this) {
+        if ($this->resultFiles->removeElement($resultFile) && $resultFile->getContract() === $this) {
                 $resultFile->setContract(null);
             }
         }
@@ -386,9 +384,7 @@ class Contract
 
     public function removeAttachment(ContractAttachment $attachment): static
     {
-        if ($this->attachments->removeElement($attachment)) {
-            // set the owning side to null (unless already changed)
-            if ($attachment->getContract() === $this) {
+        if ($this->attachments->removeElement($attachment) && $attachment->getContract() === $this) {
                 $attachment->setContract(null);
             }
         }
@@ -416,9 +412,7 @@ class Contract
 
     public function removeContractMetum(ContractMeta $contractMetum): static
     {
-        if ($this->contractMeta->removeElement($contractMetum)) {
-            // set the owning side to null (unless already changed)
-            if ($contractMetum->getContract() === $this) {
+        if ($this->contractMeta->removeElement($contractMetum) && $contractMetum->getContract() === $this) {
                 $contractMetum->setContract(null);
             }
         }

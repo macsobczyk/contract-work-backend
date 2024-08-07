@@ -2,7 +2,7 @@
 
 namespace App\Core\Contract\Model;
 
-use App\Repository\ContractAttachmentRepository;
+use App\Core\Contract\Repository\ContractAttachmentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ContractAttachmentRepository::class)]

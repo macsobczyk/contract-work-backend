@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Company\Model;
+namespace App\Core\Company\Model;
 
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Metadata\ApiFilter;
@@ -8,11 +8,10 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use App\Core\Address\Model\Address;
-use App\Core\Company\Model\CompanyRepresentation;
 use App\Core\User\Model\Role;
 use App\Core\Contract\Model\Contract;
 use App\Filter as CustomFilter;
-use App\Repository\CompanyRepository;
+use App\Core\Company\Repository\CompanyManager;
 use App\Security\Voter\CompanyVoter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -204,9 +203,7 @@ class Company
 
     public function removeRepresentative(CompanyRepresentation $representative): static
     {
-        if ($this->representatives->removeElement($representative)) {
-            // set the owning side to null (unless already changed)
-            if ($representative->getCompany() === $this) {
+        if ($this->representatives->removeElement($representative) && $representative->getCompany() === $this) {
                 $representative->setCompany(null);
             }
         }
@@ -234,9 +231,7 @@ class Company
 
     public function removeContract(Contract $contract): static
     {
-        if ($this->contracts->removeElement($contract)) {
-            // set the owning side to null (unless already changed)
-            if ($contract->getCompany() === $this) {
+        if ($this->contracts->removeElement($contract) && $contract->getCompany() === $this) {
                 $contract->setCompany(null);
             }
         }

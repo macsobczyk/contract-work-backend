@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Core\Address\Model;
+use App\Core\Address\Model\Address;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class AddressFixtures extends Fixture
-{
+class AddressFixtures extends Fixture {
     public const COMPANY_ADDRESS_REFERENCE = 'company-address';
 
     public const ADMIN_ADDRESS_REFERENCE = 'admin-address';
@@ -22,15 +21,22 @@ class AddressFixtures extends Fixture
 
     public const REPRESENTATION_ADDRESS_REFERENCE = 'representation-address';
 
-    public function load(ObjectManager $manager)
-    {
+    private const DEFAULT_PHONE_NUMBER = '123456789';
+
+    private const DEFAULT_PHONE_NUMBER2 = '987654321';
+
+    private const DEFAULT_PHONE_NUMBER3 = '917151311';
+
+    private const DEFAULT_PHONE_NUMBER4 = '111151311';
+
+    public function load(ObjectManager $manager) {
         $companyAddress = $this->createAddress(
             'Dummy Company Address',
             'Richardson Street 123',
             '12-345',
             'Warszawa',
             'PL',
-            '123456789'
+            self::DEFAULT_PHONE_NUMBER
         );
         $manager->persist($companyAddress);
         $this->addReference(self::COMPANY_ADDRESS_REFERENCE, $companyAddress);
@@ -41,7 +47,7 @@ class AddressFixtures extends Fixture
             '12-345',
             'Wroclaw',
             'PL',
-            '123456789'
+            self::DEFAULT_PHONE_NUMBER
         );
         $manager->persist($adminAddress);
         $this->addReference(self::ADMIN_ADDRESS_REFERENCE, $adminAddress);
@@ -52,7 +58,8 @@ class AddressFixtures extends Fixture
             '54-321',
             'Katowice',
             'PL',
-            '987654321'
+            self::DEFAULT_PHONE_NUMBER2
+
         );
         $manager->persist($contractorAddress1);
         $this->addReference(self::CONTRACTOR1_ADDRESS_REFERENCE, $contractorAddress1);
@@ -63,7 +70,7 @@ class AddressFixtures extends Fixture
             '66-777',
             'Poznan',
             'PL',
-            '917151311'
+            self::DEFAULT_PHONE_NUMBER3
         );
         $manager->persist($contractorAddress2);
         $this->addReference(self::CONTRACTOR2_ADDRESS_REFERENCE, $contractorAddress2);
@@ -74,7 +81,7 @@ class AddressFixtures extends Fixture
             '77-888',
             'Gdansk',
             'PL',
-            '111151311'
+            self::DEFAULT_PHONE_NUMBER4
         );
         $manager->persist($contractorAddress3);
         $this->addReference(self::CONTRACTOR3_ADDRESS_REFERENCE, $contractorAddress3);
@@ -85,7 +92,7 @@ class AddressFixtures extends Fixture
             '67-890',
             'Dummy City',
             'PL',
-            '123456789'
+            self::DEFAULT_PHONE_NUMBER
         );
         $manager->persist($representationAddress);
         $this->addReference(self::REPRESENTATION_ADDRESS_REFERENCE, $representationAddress);
@@ -93,8 +100,7 @@ class AddressFixtures extends Fixture
         $manager->flush();
     }
 
-    private function createAddress(string $name, string $address, string $postCode, string $city, string $countryCode, string $phoneNumber): Address
-    {
+    private function createAddress(string $name, string $address, string $postCode, string $city, string $countryCode, string $phoneNumber): Address {
         $addressEntity = new Address();
         $addressEntity->setName($name);
         $addressEntity->setAddress($address);

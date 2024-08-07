@@ -16,23 +16,25 @@ final class ViewContractTemplateAction extends BaseViewAction
 
     private const TEMPLATE_FILE_NAME = 'contract-template-%s-%s.pdf';
 
+    private const TEMPLATE_DIR = 'contract-template/';
+
 
     public function generateBillTemplate(ContractTemplate $data): void
     {
-        $this->_filePath = 'contract-template/'.$data->getBillTemplatePath();
+        $this->_filePath = self::TEMPLATE_DIR.$data->getBillTemplatePath();
         $this->_fileNamePattern = self::TEMPLATE_FILE_NAME;
     }
 
     public function generateContractTemplate(ContractTemplate $data): void
     {
-        $this->_filePath = 'contract-template/'.$data->getContractTemplatePath();
-        $this->_fileNamePattern = self::CONTRACT_TEMPLATE_FILE_NAME;
+        $this->_filePath = self::TEMPLATE_DIR.$data->getContractTemplatePath();
+        $this->_fileNamePattern = self::TEMPLATE_FILE_NAME;
     }
 
     public function __invoke(Request $request, ContractTemplate $data) : Response
     {
         $this->_fileNamePattern = self::TEMPLATE_FILE_NAME;
-        $this->_filePath = 'contract-template/'.$data->getContractTemplatePath();
+        $this->_filePath = self::TEMPLATE_DIR.$data->getContractTemplatePath();
 
         return $this->renderTemplate($request, $data);
     }

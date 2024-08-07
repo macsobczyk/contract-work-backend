@@ -7,7 +7,7 @@ namespace App\Filter;
 use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
-use App\Entity\Company;
+use App\Core\Company\Model\Company;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\PropertyInfo\Type;
 
@@ -16,7 +16,7 @@ final class CompanyKeywordSearchFilter extends AbstractFilter
     protected function filterProperty(string $property, $value, QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, Operation $operation = null, array $context = []): void
     {
         if (!$this->isPropertyEnabled($property, $resourceClass)
-            || !($resourceClass === Company::class and $property === Company::COMPANY_KEYWORD_SEARCH)
+            || !($resourceClass === Company::class && $property === Company::COMPANY_KEYWORD_SEARCH)
         ) {
             return;
         }

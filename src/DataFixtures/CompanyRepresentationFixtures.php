@@ -6,7 +6,7 @@ namespace App\DataFixtures;
 
 use App\DataFixtures\CompanyFixtures;
 use App\DataFixtures\UserFixtures;
-use App\Entity\CompanyRepresentation;
+use App\Core\Company\Model\CompanyRepresentation;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -21,7 +21,6 @@ class CompanyRepresentationFixtures extends Fixture implements DependentFixtureI
         $representation->setCompany($this->getReference(CompanyFixtures::COMPANY_REFERENCE));
         $representation->setCompanyUser($this->getReference(UserFixtures::REPRESENTATION_USER_REFERENCE));
         $representation->setPosition('CEO');
-
 
         $manager->persist($representation);
         $manager->flush();

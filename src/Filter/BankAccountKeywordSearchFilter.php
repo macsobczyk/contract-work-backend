@@ -7,7 +7,7 @@ namespace App\Filter;
 use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
-use App\Entity\BankAccount;
+use App\Core\BankAccount\Model\BankAccount;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\PropertyInfo\Type;
 
@@ -15,8 +15,8 @@ final class BankAccountKeywordSearchFilter extends AbstractFilter
 {
     protected function filterProperty(string $property, $value, QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, Operation $operation = null, array $context = []): void
     {
-        if (!$this->isPropertyEnabled($property, $resourceClass)
-            || !($resourceClass === BankAccount::class and $property === BankAccount::BANK_ACCOUNT_KEYWORD_SEARCH)
+        if (!($resourceClass === BankAccount::class && $property === BankAccount::BANK_ACCOUNT_KEYWORD_SEARCH)
+            || !$this->isPropertyEnabled($property, $resourceClass)
         ) {
             return;
         }
