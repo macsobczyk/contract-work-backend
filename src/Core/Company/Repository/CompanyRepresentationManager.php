@@ -1,10 +1,8 @@
-<?php 
+<?php
 
 namespace App\Core\Company\Repository;
 
-use App\Core\Company\Repository\CompanyRepresentationRepositoryInterface;
-
-class CompanyRepresentationManager
+final class CompanyRepresentationManager
 {
     public function __construct(
         private CompanyRepresentationRepositoryInterface $repository

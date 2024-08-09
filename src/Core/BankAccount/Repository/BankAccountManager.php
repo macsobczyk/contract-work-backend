@@ -2,8 +2,6 @@
 
 namespace App\Core\BankAccount\Repository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-
 final class BankAccountManager
 {
     public function __construct(
