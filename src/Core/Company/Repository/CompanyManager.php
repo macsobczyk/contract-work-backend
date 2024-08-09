@@ -2,8 +2,7 @@
 
 namespace App\Core\Company\Repository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-class CompanyManager
+final class CompanyManager
 {
     public function __construct(
         private CompanyRepositoryInterface $repository

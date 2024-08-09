@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use App\Core\Address\Repository\AddressManager;
 use App\Core\Company\Model\Company;
 use App\Core\User\Model\Role;
@@ -30,7 +31,11 @@ use \RuntimeException;
         new GetCollection(
             uriTemplate: '/address',
             normalizationContext: ['groups' => ['address-list']]
-        )
+        ),
+		new Post(
+			uriTemplate: '/address',
+			status: 301
+		)
     ],
     normalizationContext: ['groups' => ['address-list','address-details']],
     denormalizationContext: ['groups' => ['address-write']],

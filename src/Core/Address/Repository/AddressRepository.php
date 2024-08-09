@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Address\Model\Repository;
+namespace App\Core\Address\Repository;
 
 use App\Core\Address\Model\Address;
-use App\Core\Address\Repository\AddressRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
